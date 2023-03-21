@@ -16,7 +16,6 @@ Addon that provides a `<I18n>` component to help with putting more complex conte
 ember install ember-i18n-component
 ```
 
-
 ## Usage
 
 ```hbs
@@ -63,11 +62,14 @@ Expected to be used like:
 so we get intellisense.
 
 
-## Contributing
+## Alternatives
 
-See the [Contributing](CONTRIBUTING.md) guide for details.
+We could use the existing https://github.com/RuslanZavacky/ember-intl-component
 
+The add-on looks great for putting a component directly into translation strings but there are a few reasons why I think we shouldn’t use it:
 
-## License
+* It doesn’t seem to support wrapping text in a translation string with a component. So it supports doing `[[[my-component]]]` where `my-component` is the name of yieldable block, but there’s no way to yield some text to that block as far as I can see.
 
-This project is licensed under the [MIT License](LICENSE.md).
+* I don’t think the syntax it uses `[[[]]]` is proper ICU message syntax. It would probably be okay but it would be better to stick to supported/understandable tags (like `<my-tag></my-tag>`) which I believe _is_ supported: https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting
+
+* Assuming the above two points weren’t an issue, the functionality the add-on provides isn’t that complex so it might actually be easier to mange this ourselves in a private/public addon 🤔
