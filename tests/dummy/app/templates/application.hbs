@@ -1,5 +1,7 @@
-{{page-title "Dummy"}}
+<h1>
+  @zestia/ember-rich-intl
+</h1>
 
-<h2 id="title">Welcome to Ember</h2>
-
-{{outlet}}
+<Intl @string="Hello <World>World</World>" as |intl|>
+  <intl.World>🌎</intl.World>
+</Intl>
