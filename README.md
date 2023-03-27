@@ -1,6 +1,6 @@
 # ember-i18n-component
 
-Addon that provides a `<I18n>` component to help with putting more complex content inside of translation strings.
+Addon that provides a `<Intl>` component to help with putting more complex content inside of translation strings.
 
 
 ## Compatibility
@@ -13,13 +13,13 @@ Addon that provides a `<I18n>` component to help with putting more complex conte
 ## Installation
 
 ```
-ember install ember-i18n-component
+ember install @zestia/ember-intl-component
 ```
 
 ## Usage
 
 ```hbs
-<I18n
+<Intl
   @string='Visit our <:link>support documentation</:link> or read our <:online-guide>online guide</:online-guide>.'
   as |Message|
 >
@@ -30,13 +30,13 @@ ember install ember-i18n-component
 
     <:online-guide as |string|><a href="https://capsulecrm.com/guide">{{string}}</a></:online-guide>
   </Message>
-</I18n>
+</Intl>
 ```
 
 or without content:
 
 ```hbs
-<I18n
+<Intl
   @string='Task for <:party></:party>'
   as |Message|
 >
@@ -49,14 +49,14 @@ or without content:
       </span>
     </:party>
   </Message>
-</I18n>
+</Intl>
 ```
 
 Expected to be used like:
 
 ```hbs
-<I18n @string={{t "my-translation-key"}} as |Message|>
-</I18n>
+<Intl @string={{t "my-translation-key"}} as |Message|>
+</Intl>
 ```
 
 so we get intellisense.

@@ -1,7 +1,7 @@
 import Component from '@glimmer/component';
 import { compileHBS } from 'ember-repl';
 
-export default class I18nComponent extends Component {
+export default class IntlComponent extends Component {
   get template() {
     const parts = this._getPartsFromString(this.args.string);
 

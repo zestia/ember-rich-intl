@@ -1,13 +1,13 @@
 {
-  "name": "ember-i18n-component",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "name": "@zestia/ember-intl-component",
+  "version": "0.1.0",
+  "description": "A component that allows you to replace content within a string with named yieldable blocks",
   "keywords": [
     "ember-addon"
   ],
-  "repository": "",
+  "repository": "https://github.com/zestia/ember-intl-component",
   "license": "MIT",
-  "author": "",
+  "author": "Zestia",
   "directories": {
     "doc": "doc",
     "test": "tests"
@@ -55,7 +55,6 @@
     "ember-source-channel-url": "^3.0.0",
     "ember-template-lint": "^5.6.0",
     "ember-try": "^2.0.0",
-    "ember-welcome-page": "^7.0.1",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-ember": "^11.4.7",

@@ -3,7 +3,7 @@
 ## Installation
 
 * `git clone <repository-url>`
-* `cd ember-i18n-component`
+* `cd ember-intl-component`
 * `npm install`
 
 ## Linting
