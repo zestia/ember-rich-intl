@@ -8,9 +8,9 @@ This Ember addon takes some text, and swaps [ICU message syntax](https://formatj
 ember install @zestia/ember-rich-intl
 ```
 
-<!-- ## Demo
+## Demo
 
-https://zestia.github.io/ember-rich-intl -->
+https://zestia.github.io/ember-rich-intl
 
 ## Example
 
