@@ -1,1 +1,1 @@
-export { default } from '@zestia/ember-intl-component/components/intl';
+export { default } from '@zestia/ember-rich-intl/components/intl';

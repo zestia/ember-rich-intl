@@ -1,75 +1,41 @@
-# ember-i18n-component
+# @zestia/ember-rich-intl
 
-Addon that provides a `<Intl>` component to help with putting more complex content inside of translation strings.
-
-
-## Compatibility
-
-* Ember.js v3.28 or above
-* Ember CLI v3.28 or above
-* Node.js v14 or above
-
+This Ember addon takes some text, and swaps [ICU message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting) for components.
 
 ## Installation
 
 ```
-ember install @zestia/ember-intl-component
+ember install @zestia/ember-rich-intl
 ```
 
-## Usage
+<!-- ## Demo
+
+https://zestia.github.io/ember-rich-intl -->
+
+## Example
 
 ```hbs
-<Intl
-  @string='Visit our <:link>support documentation</:link> or read our <:online-guide>online guide</:online-guide>.'
-  as |Message|
->
-  <Message>
-    <:link as |string|>
-      <a href="https://capsulecrm.com">{{string}}</a>
-    </:link>
-
-    <:online-guide as |string|><a href="https://capsulecrm.com/guide">{{string}}</a></:online-guide>
-  </Message>
+<Intl @string='View <More>more</More>' as |intl|>
+  <intl.More as |string|>
+    <button type='button {{on "click" this.viewMore}}'>
+      {{string}}
+    </button>
+  </intl.More>
 </Intl>
 ```
 
-or without content:
+## `Intl`
 
-```hbs
-<Intl
-  @string='Task for <:party></:party>'
-  as |Message|
->
-  <Message>
-    <:party>
-      <span class="tooltipper">
-        <a href="party/123">
-          Burger King
-        </a>
-      </span>
-    </:party>
-  </Message>
-</Intl>
-```
+### Arguments
 
-Expected to be used like:
+#### `@string`
 
-```hbs
-<Intl @string={{t "my-translation-key"}} as |Message|>
-</Intl>
-```
+Required. The text within which to find parts.
 
-so we get intellisense.
+### API
 
+When a token is found, and a component is rendered in its place, that component will have these arguments passed to it:
 
-## Alternatives
+#### `@string`
 
-We could use the existing https://github.com/RuslanZavacky/ember-intl-component
-
-The add-on looks great for putting a component directly into translation strings but there are a few reasons why I think we shouldn’t use it:
-
-* It doesn’t seem to support wrapping text in a translation string with a component. So it supports doing `[[[my-component]]]` where `my-component` is the name of yieldable block, but there’s no way to yield some text to that block as far as I can see.
-
-* I don’t think the syntax it uses `[[[]]]` is proper ICU message syntax. It would probably be okay but it would be better to stick to supported/understandable tags (like `<my-tag></my-tag>`) which I believe _is_ supported: https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting
-
-* Assuming the above two points weren’t an issue, the functionality the add-on provides isn’t that complex so it might actually be easier to mange this ourselves in a private/public addon 🤔
+The matched part

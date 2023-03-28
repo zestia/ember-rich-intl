@@ -1,48 +1,39 @@
 import Component from '@glimmer/component';
-import { compileHBS } from 'ember-repl';
+import Part from '@zestia/ember-rich-intl/components/part';
 
 export default class IntlComponent extends Component {
-  get template() {
-    const parts = this._getPartsFromString(this.args.string);
+  Part = Part;
 
-    let hbs = '';
+  api = (name, Component) => {
+    return {
+      [name]: Component
+    };
+  };
 
-    parts.forEach((part) => {
-      if (typeof part === 'object') {
-        hbs += `{{yield "${part.content}" to="${part.name}"}}`;
-      } else {
-        hbs += part;
-      }
-    });
+  get parts() {
+    const regex = /(<[\w:'-]+>.*?<\/[\w:'-]+>|<[\w:'-]+ \/>)/g;
 
-    return compileHBS(hbs);
-  }
-
-  /**
-   * @param {string} string
-   *
-   * Given the following string: "Visit our <:link>documentation</:link>."
-   * Return: ["Visit our ", {name: "link", content: "documentation"}, "."]
-   */
-  _getPartsFromString(string) {
-    const regex = /(<:[\w'-]+>.*?<\/:[\w'-]+>)/g;
-
-    const parts = string.split(regex).map((part) => {
+    return this.args.string.split(regex).map((part) => {
       const matches = part.match(regex);
 
       if (matches !== null) {
-        const blockName = part.match(/<:(.*?)>/)[1];
-        const blockContent = part.match(/<:[\w'-]+>(.*?)<\/:[\w'-]+>/)[1];
+        const name = part.match(/<([\w:'-]+)\s?\/?>/)[1];
+
+        let string = '';
+
+        const matches = part.match(/<[\w:'-]+>(.*?)<\/[\w:'-]+>/);
+
+        if (matches !== null) {
+          string = matches[1];
+        }
 
         return {
-          name: blockName,
-          content: blockContent,
+          string,
+          name
         };
       }
 
       return part;
     });
-
-    return parts;
   }
 }
