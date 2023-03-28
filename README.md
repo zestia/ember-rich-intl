@@ -34,8 +34,8 @@ Required. The text within which to find parts.
 
 ### API
 
-When a token is found, and a component is rendered in its place, that component will have these arguments passed to it:
+When a token is found, and a component is rendered in its place, that component will will yield:
 
-#### `@string`
+#### `string`
 
-The matched part
+Optional. The matched part
