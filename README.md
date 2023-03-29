@@ -1,6 +1,6 @@
 # @zestia/ember-rich-intl
 
-This Ember addon works in conjunction with [ember-intl](https://github.com/ember-intl/ember-intl). It swaps [ICU message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting) for components allowing for dynamic content within translated strings.
+This Ember addon works in conjunction with [ember-intl](https://github.com/ember-intl/ember-intl). It swaps [ICU message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting) for components, allowing for dynamic content within translated strings.
 
 ## Installation
 
