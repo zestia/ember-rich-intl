@@ -11,7 +11,7 @@ export default class IntlComponent extends Component {
   };
 
   get parts() {
-    const regex = /(<[\w:'-]+>.*?<\/[\w:'-]+>|<[\w:'-]+ \/>)/g;
+    const regex = /(<[\w:'-]+>.*?<\/[\w:'-]+>|<[\w:'-]+ ?\/>)/g;
 
     return this.args.string.split(regex).map((part) => {
       const matches = part.match(regex);

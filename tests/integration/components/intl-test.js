@@ -43,4 +43,30 @@ module('Integration | Component | intl', function (hooks) {
       this.output
     );
   });
+
+  test('it handles self closing tags without a space (regression)', async function (assert) {
+    assert.expect(1);
+
+    this.input =
+      'This is a test <Icon/> with self closing tags that do not have a space between the name and the closing tag.';
+
+    this.output =
+      'This is a test <img src="icon.png" alt="Icon"> with self closing tags that do not have a space between the name and the closing tag.';
+
+    await render(hbs`
+      <Intl @string={{this.input}} as |intl|>
+        <intl.Icon>
+          <img src="icon.png" alt="Icon" />
+        </intl.Icon>
+      </Intl>
+    `);
+
+    assert.strictEqual(
+      this.element.innerHTML
+        .trim()
+        .replace(/<!---->/g, '')
+        .replace(/\s+/g, ' '),
+      this.output
+    );
+  });
 });
