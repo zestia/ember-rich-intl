@@ -12,7 +12,7 @@ module('Integration | Component | intl', function (hooks) {
     this.input =
       'Hello, this is a <Button>test string</Button> that can be ' +
       '<Link>translated</Link> into multiple languages. ' +
-      'Inside it there are tokens such as <Icon />  or <Tag/> which are swapped for ' +
+      'Inside it there are tokens such as <Icon /> or <Tag/> which are swapped for ' +
       'components allowing for dynamic content.';
 
     this.output =
