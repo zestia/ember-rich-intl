@@ -1,4 +1,4 @@
-import { module, test } from 'qunit';
+import { module, test, skip } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render } from '@ember/test-helpers';
 import { hbs } from 'ember-cli-htmlbars';
@@ -35,7 +35,7 @@ module('Integration | Component | intl', function (hooks) {
     this.assertHTML();
   });
 
-  test('inline syntax', async function (assert) {
+  test('self closing syntax', async function (assert) {
     assert.expect(1);
 
     this.input = 'Hello <World />';
@@ -50,7 +50,24 @@ module('Integration | Component | intl', function (hooks) {
     this.assertHTML();
   });
 
-  test('nested syntax', async function (assert) {
+  skip('nested block syntax not supported', async function (assert) {
+    assert.expect(1);
+
+    this.input = 'Visit <Link>the <Blink>destination</Blink></Link>';
+    this.output = 'Visit destination';
+
+    await render(hbs`
+      <Intl @string={{this.input}} as |intl|>
+        <intl.Link as |string|>
+          {{string}}
+        </intl.Link>
+      </Intl>
+    `);
+
+    this.assertHTML();
+  });
+
+  test('nested self closing syntax not supported', async function (assert) {
     assert.expect(1);
 
     this.input = 'Visit <Link><Image /> destination</Link>';
