@@ -2,6 +2,8 @@
 
 This Ember addon works in conjunction with [ember-intl](https://github.com/ember-intl/ember-intl). It swaps [ICU message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting) for components, allowing for dynamic content within translated strings.
 
+**Important note:** We recommend limiting usage of components in translation strings. The majority of the time, its possible to reword the string, or reconsider the design instead.
+
 ## Installation
 
 ```
