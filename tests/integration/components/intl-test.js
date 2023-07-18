@@ -94,4 +94,21 @@ module('Integration | Component | intl', function (hooks) {
 
     this.assertHTML();
   });
+
+  test('mixed with HTML not supported', async function (assert) {
+    assert.expect(1);
+
+    this.input = '<Image /> <em>really</em> interesting';
+    this.output = '<img> interesting';
+
+    await render(hbs`
+      <Intl @string={{this.input}} as |intl|>
+        <intl.Image>
+          <img />
+        </intl.Image>
+      </Intl>
+    `);
+
+    this.assertHTML();
+  });
 });
