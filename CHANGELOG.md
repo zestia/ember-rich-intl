@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.2
+
+- Update `@zestia` scoped packages
+
 ## 1.0.1
 
 - Re-release of 1.0.0 but published to GH Packages instead of NPM
