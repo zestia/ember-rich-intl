@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.0.3
+
+- Run ember-cli-update
+- Upgrade dependencies
+- Convert tests to `.gjs`
+
 ## 1.0.2
 
 - Update `@zestia` scoped packages

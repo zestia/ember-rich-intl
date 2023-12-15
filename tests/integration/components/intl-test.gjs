@@ -1,4 +1,4 @@
-import { module, test, skip, assert } from 'qunit';
+import { module, test, assert } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, getRootElement } from '@ember/test-helpers';
 import Intl from '@zestia/ember-rich-intl/components/intl';
@@ -51,41 +51,6 @@ module('Integration | Component | intl', function (hooks) {
     assertHTML();
   });
 
-  // not supported
-  skip('nested block syntax', async function (assert) {
-    assert.expect(1);
-
-    input = 'Visit <Link>the <Blink>destination</Blink></Link>';
-    output = 'Visit destination';
-
-    await render(<template>
-      <Intl @string={{input}} as |intl|>
-        <intl.Link as |string|>
-          {{string}}
-        </intl.Link>
-      </Intl>
-    </template>);
-
-    assertHTML();
-  });
-
-  test('nested self closing syntax not supported', async function (assert) {
-    assert.expect(1);
-
-    input = 'Visit <Link><Image /> destination</Link>';
-    output = 'Visit &lt;Image /&gt; destination';
-
-    await render(<template>
-      <Intl @string={{input}} as |intl|>
-        <intl.Link as |string|>
-          {{string}}
-        </intl.Link>
-      </Intl>
-    </template>);
-
-    assertHTML();
-  });
-
   test('missing components', async function (assert) {
     assert.expect(1);
 
@@ -97,21 +62,58 @@ module('Integration | Component | intl', function (hooks) {
     assertHTML();
   });
 
-  test('mixed with HTML not supported', async function (assert) {
-    assert.expect(1);
+  module('not supported', function () {
+    test('nested block syntax', async function (assert) {
+      assert.expect(1);
 
-    input = '<Image /> <em>really</em> interesting';
-    output = '<img> interesting';
+      input = 'Visit <Link>the <Blink>destination</Blink></Link>';
+      output =
+        'Visit <a href="#">the &lt;Blink&gt;destination</a> &lt;/Link&gt;';
 
-    await render(<template>
-      {{! template-lint-disable require-valid-alt-text }}
-      <Intl @string={{input}} as |intl|>
-        <intl.Image>
-          <img />
-        </intl.Image>
-      </Intl>
-    </template>);
+      await render(<template>
+        <Intl @string={{input}} as |intl|>
+          <intl.Link as |string|>
+            <a href="#">{{string}}</a>
+          </intl.Link>
+        </Intl>
+      </template>);
 
-    assertHTML();
+      assertHTML();
+    });
+
+    test('nested self closing syntax', async function (assert) {
+      assert.expect(1);
+
+      input = 'Visit <Link><Image /> destination</Link>';
+      output = 'Visit <a href="#">&lt;Image /&gt; destination</a>';
+
+      await render(<template>
+        <Intl @string={{input}} as |intl|>
+          <intl.Link as |string|>
+            <a href="#">{{string}}</a>
+          </intl.Link>
+        </Intl>
+      </template>);
+
+      assertHTML();
+    });
+
+    test('mixed with HTML', async function (assert) {
+      assert.expect(1);
+
+      input = '<Image /> <em>really</em> interesting';
+      output = '<img> interesting';
+
+      await render(<template>
+        {{! template-lint-disable require-valid-alt-text }}
+        <Intl @string={{input}} as |intl|>
+          <intl.Image>
+            <img />
+          </intl.Image>
+        </Intl>
+      </template>);
+
+      assertHTML();
+    });
   });
 });
