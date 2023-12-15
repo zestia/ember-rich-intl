@@ -102,6 +102,7 @@ module('Integration | Component | intl', function (hooks) {
     this.output = '<img> interesting';
 
     await render(hbs`
+      {{! template-lint-disable require-valid-alt-text }}
       <Intl @string={{this.input}} as |intl|>
         <intl.Image>
           <img />
