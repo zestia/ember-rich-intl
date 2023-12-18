@@ -6,114 +6,97 @@ import Intl from '@zestia/ember-rich-intl/components/intl';
 module('Integration | Component | intl', function (hooks) {
   setupRenderingTest(hooks);
 
-  let input;
-  let output;
-
-  const assertHTML = () => {
+  const assertHTML = (expecting) => {
     assert.strictEqual(
       getRootElement()
         .innerHTML.trim()
         .replace(/<!---->/g, '')
         .replace(/\s+/g, ' '),
-      output
+      expecting
     );
   };
 
   test('block syntax', async function (assert) {
     assert.expect(1);
 
-    input = 'Get <Link>support</Link>';
-    output = 'Get <a href="https://capsulecrm.com/support">support</a>';
-
     await render(<template>
-      <Intl @string={{input}} as |intl|>
+      <Intl @string="Get <Link>support</Link>" as |intl|>
         <intl.Link as |string|>
           <a href="https://capsulecrm.com/support">{{string}}</a>
         </intl.Link>
       </Intl>
     </template>);
 
-    assertHTML();
+    assertHTML('Get <a href="https://capsulecrm.com/support">support</a>');
   });
 
   test('self closing syntax', async function (assert) {
     assert.expect(1);
 
-    input = 'Hello <World />';
-    output = 'Hello 🌎';
-
     await render(<template>
-      <Intl @string={{input}} as |intl|>
+      <Intl @string="Hello <World />" as |intl|>
         <intl.World>🌎</intl.World>
       </Intl>
     </template>);
 
-    assertHTML();
+    assertHTML('Hello 🌎');
   });
 
   test('missing components', async function (assert) {
     assert.expect(1);
 
-    input = 'Hello <World />';
-    output = 'Hello ';
+    await render(<template><Intl @string="Hello <World />" /></template>);
 
-    await render(<template><Intl @string={{input}} /></template>);
-
-    assertHTML();
+    assertHTML('Hello ');
   });
 
   module('not supported', function () {
     test('nested block syntax', async function (assert) {
       assert.expect(1);
 
-      input = 'Visit <Link>the <Blink>destination</Blink></Link>';
-      output =
-        'Visit <a href="#">the &lt;Blink&gt;destination</a> &lt;/Link&gt;';
-
       await render(<template>
-        <Intl @string={{input}} as |intl|>
+        <Intl
+          @string="Visit <Link>the <Blink>destination</Blink></Link>"
+          as |intl|
+        >
           <intl.Link as |string|>
             <a href="#">{{string}}</a>
           </intl.Link>
         </Intl>
       </template>);
 
-      assertHTML();
+      assertHTML(
+        'Visit <a href="#">the &lt;Blink&gt;destination</a> &lt;/Link&gt;'
+      );
     });
 
     test('nested self closing syntax', async function (assert) {
       assert.expect(1);
 
-      input = 'Visit <Link><Image /> destination</Link>';
-      output = 'Visit <a href="#">&lt;Image /&gt; destination</a>';
-
       await render(<template>
-        <Intl @string={{input}} as |intl|>
+        <Intl @string="Visit <Link><Image /> destination</Link>" as |intl|>
           <intl.Link as |string|>
             <a href="#">{{string}}</a>
           </intl.Link>
         </Intl>
       </template>);
 
-      assertHTML();
+      assertHTML('Visit <a href="#">&lt;Image /&gt; destination</a>');
     });
 
     test('mixed with HTML', async function (assert) {
       assert.expect(1);
 
-      input = '<Image /> <em>really</em> interesting';
-      output = '<img> interesting';
-
       await render(<template>
         {{! template-lint-disable require-valid-alt-text }}
-        <Intl @string={{input}} as |intl|>
+        <Intl @string="<Image /> <em>really</em> interesting" as |intl|>
           <intl.Image>
             <img />
           </intl.Image>
         </Intl>
       </template>);
 
-      assertHTML();
+      assertHTML('<img> interesting');
     });
   });
 });
