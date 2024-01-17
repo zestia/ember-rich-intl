@@ -1,5 +1,16 @@
 # @zestia/ember-rich-intl
 
+[![Ember Observer][ember-observer-badge]][ember-observer-url]
+
+<!-- [![GitHub Actions][github-actions-badge]][github-actions-url] -->
+
+[npm-badge]: https://img.shields.io/npm/v/@zestia/ember-rich-intl.svg
+[npm-badge-url]: https://www.npmjs.com/package/@zestia/ember-rich-intl
+[github-actions-badge]: https://github.com/zestia/ember-rich-intl/workflows/CI/badge.svg
+[github-actions-url]: https://github.com/zestia/ember-rich-intl/actions
+[ember-observer-badge]: https://emberobserver.com/badges/-zestia-ember-rich-intl.svg
+[ember-observer-url]: https://emberobserver.com/addons/@zestia/ember-rich-intl
+
 This Ember addon works in conjunction with [ember-intl](https://github.com/ember-intl/ember-intl). It swaps [ICU message syntax](https://formatjs.io/docs/core-concepts/icu-syntax/#rich-text-formatting) for components, allowing for dynamic content within translated strings.
 
 **Important note:** We recommend limiting usage of components in translation strings. The majority of the time, its possible to reword the string, or reconsider the design instead.
