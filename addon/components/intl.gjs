@@ -1,15 +1,14 @@
 import Component from '@glimmer/component';
-import Part from '@zestia/ember-rich-intl/components/part';
+
+const Part = <template>{{yield @string}}</template>;
+
+const api = (name, Component) => {
+  return {
+    [name]: Component
+  };
+};
 
 export default class IntlComponent extends Component {
-  Part = Part;
-
-  api = (name, Component) => {
-    return {
-      [name]: Component
-    };
-  };
-
   get parts() {
     const regex = /(<[\w:'-]+>.*?<\/[\w:'-]+>|<[\w:'-]+ ?\/>)/g;
 
@@ -36,4 +35,14 @@ export default class IntlComponent extends Component {
       return part;
     });
   }
+
+  <template>
+    {{~#each this.parts as |part|~}}
+      {{~#if part.name~}}
+        {{~yield (api part.name (component Part string=part.string))~}}
+      {{~else~}}
+        {{~part~}}
+      {{~/if~}}
+    {{~/each~}}
+  </template>
 }

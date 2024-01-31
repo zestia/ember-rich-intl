@@ -1,7 +1,0 @@
-{{~#each this.parts as |part|~}}
-  {{~#if part.name~}}
-    {{~yield (this.api part.name (component this.Part string=part.string))~}}
-  {{~else~}}
-    {{~part~}}
-  {{~/if~}}
-{{~/each~}}
