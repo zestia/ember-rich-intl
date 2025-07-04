@@ -1,6 +1,6 @@
 {
   "name": "@zestia/ember-rich-intl",
-  "version": "1.0.5",
+  "version": "2.0.0",
   "description": "Dynamic i18n segments",
   "keywords": [
     "ember-addon",
