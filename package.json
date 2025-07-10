@@ -84,7 +84,10 @@
   "ember-addon": {
     "version": 2,
     "type": "addon",
-    "main": "addon-main.cjs"
+    "main": "addon-main.cjs",
+    "app-js": {
+      "./components/intl.js": "./dist/_app_/components/intl.js"
+    }
   },
   "imports": {
     "#app/*": "./demo/*",
