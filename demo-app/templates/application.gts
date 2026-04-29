@@ -1,5 +1,5 @@
 import Route from 'ember-route-template';
-import Intl from '@zestia/ember-rich-intl/components/intl';
+import Intl from '#src/components/intl';
 
 export default Route(
   <template>

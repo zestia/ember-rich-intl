@@ -1,7 +1,7 @@
 import { module, test, assert } from 'qunit';
 import { setupRenderingTest } from 'ember-qunit';
 import { render, getRootElement } from '@ember/test-helpers';
-import Intl from '@zestia/ember-rich-intl/components/intl';
+import Intl from '#src/components/intl';
 
 module('Integration | Component | intl', function (hooks) {
   setupRenderingTest(hooks);
